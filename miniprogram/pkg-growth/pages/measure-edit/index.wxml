@@ -1,0 +1,34 @@
+<nav-bar back title="{{id ? '编辑测量' : '记录测量'}}" />
+<view class="page page-sub">
+  <view class="card form">
+    <picker mode="date" value="{{measureDate}}" start="{{birthDate}}" end="{{today}}" bindchange="onDate">
+      <view class="form-item">
+        <text class="form-label">测量日期</text>
+        <text class="form-value">{{measureDate}}</text>
+      </view>
+    </picker>
+    <view class="form-item">
+      <text class="form-label">身高</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{height}}" data-field="height" bindinput="onInput" />
+      <text class="unit">cm</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">体重</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{weight}}" data-field="weight" bindinput="onInput" />
+      <text class="unit">kg</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">头围</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{head}}" data-field="head" bindinput="onInput" />
+      <text class="unit">cm</text>
+    </view>
+    <view class="form-item column">
+      <text class="form-label">备注</text>
+      <textarea class="textarea" placeholder="可选，如：体检 / 自己在家量的" maxlength="500" value="{{note}}" data-field="note" bindinput="onInput" auto-height />
+    </view>
+  </view>
+  <view class="btn {{saving ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSave">保存</view>
+  <view wx:if="{{id}}" class="btn ghost delete" hover-class="btn-hover" bindtap="onDelete">
+    删除这条记录
+  </view>
+</view>

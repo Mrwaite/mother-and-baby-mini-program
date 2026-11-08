@@ -1,0 +1,120 @@
+.sheet-body {
+  padding-bottom: 16rpx;
+}
+
+.delete {
+  font-size: 30rpx;
+  color: var(--color-danger);
+  padding: 16rpx 0;
+}
+
+.form-card {
+  padding: 0 32rpx;
+}
+
+.chevron {
+  margin-left: 12rpx;
+  color: var(--color-text-3);
+  font-size: 32rpx;
+}
+
+.chips-row {
+  padding-top: 0;
+}
+
+.chips-gap {
+  margin-top: 24rpx;
+}
+
+.sub-label {
+  margin: 12rpx 0;
+  font-size: 24rpx;
+}
+
+.span {
+  padding: 0 0 24rpx;
+  font-size: 24rpx;
+  text-align: right;
+}
+
+.unit {
+  margin-left: 8rpx;
+  color: var(--color-text-2);
+}
+
+.temp-input {
+  font-size: 44rpx;
+  font-weight: 600;
+}
+
+.temp-input.fever {
+  color: var(--color-danger);
+}
+
+.fever-hint {
+  margin-bottom: 16rpx;
+  padding: 12rpx 20rpx;
+  border-radius: var(--radius-sm);
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  font-size: 24rpx;
+}
+
+.name-input {
+  height: 80rpx;
+  padding: 0 24rpx;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  font-size: 30rpx;
+}
+
+.clock-wrap {
+  padding: 24rpx 0 32rpx;
+  text-align: center;
+}
+
+.clock {
+  font-size: 112rpx;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sides {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 24rpx;
+}
+
+.side {
+  flex: 1;
+  padding: 20rpx 0;
+  border-radius: var(--radius-card);
+  border: 2rpx solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.side-name {
+  font-size: 24rpx;
+  color: var(--color-text-2);
+}
+
+.side-time {
+  margin-top: 6rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.switch {
+  margin-top: 24rpx;
+}
+
+.start-row {
+  gap: 24rpx;
+}
+
+.link {
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--color-text-2);
+}

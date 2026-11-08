@@ -1,0 +1,57 @@
+.record-card {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 24rpx 24rpx 28rpx;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.main {
+  margin-left: 20rpx;
+}
+
+.label {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-right: 12rpx;
+}
+
+.value-tag {
+  font-weight: 600;
+}
+
+.value-tag.row {
+  display: inline-flex;
+}
+
+.sub {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: var(--color-text-2);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.time {
+  font-size: 26rpx;
+  color: var(--color-text);
+}
+
+.recorder {
+  font-size: 22rpx;
+  color: var(--color-text-3);
+}
+
+.arrow {
+  margin-left: 12rpx;
+  font-size: 40rpx;
+  color: var(--color-text-3);
+}

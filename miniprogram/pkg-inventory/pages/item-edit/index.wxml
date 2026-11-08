@@ -1,0 +1,47 @@
+<nav-bar back title="{{id ? '编辑耗材' : '新增耗材'}}" />
+<view class="page page-sub">
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+  <block wx:else>
+    <view class="card form">
+      <view class="form-item">
+        <text class="form-label">名称</text>
+        <input class="form-input" placeholder="如：花王纸尿裤" maxlength="64" value="{{name}}" data-field="name" bindinput="onInput" />
+      </view>
+      <view class="form-item column">
+        <text class="form-label">分类</text>
+        <chip-group options="{{categoryOptions}}" value="{{category}}" bind:change="onCategory" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">规格</text>
+        <input class="form-input" placeholder="选填，如：S 码 / 2 段" maxlength="32" value="{{spec}}" data-field="spec" bindinput="onInput" />
+      </view>
+      <view class="form-item column">
+        <view class="row between">
+          <text class="form-label">单位</text>
+          <input class="unit-input" maxlength="8" value="{{unit}}" data-field="unit" bindinput="onInput" />
+        </view>
+        <view class="chips-gap">
+          <chip-group options="{{unitOptions}}" value="{{unit}}" data-field="unit" bind:change="onField" />
+        </view>
+      </view>
+      <view class="form-item column">
+        <text class="form-label">低于多少时提醒</text>
+        <stepper value="{{lowThreshold}}" min="0" max="100000" unit="{{unit}}" data-field="lowThreshold" bind:change="onField" />
+      </view>
+      <view wx:if="{{!id}}" class="form-item column">
+        <text class="form-label">当前库存</text>
+        <stepper value="{{quantity}}" min="0" max="100000" unit="{{unit}}" data-field="quantity" bind:change="onField" />
+      </view>
+      <view class="form-item column">
+        <text class="form-label">备注</text>
+        <textarea class="textarea" placeholder="可选" maxlength="500" value="{{note}}" data-field="note" bindinput="onInput" auto-height />
+      </view>
+    </view>
+    <view class="btn {{saving ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSave">
+      保存
+    </view>
+    <view wx:if="{{id}}" class="btn ghost archive" hover-class="btn-hover" bindtap="onToggleArchive">
+      {{archived ? '取消归档' : '归档这个耗材'}}
+    </view>
+  </block>
+</view>

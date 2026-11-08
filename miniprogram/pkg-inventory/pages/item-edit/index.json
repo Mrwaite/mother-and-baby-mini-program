@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "chip-group": "/components/chip-group/index",
+    "stepper": "/components/stepper/index"
+  }
+}

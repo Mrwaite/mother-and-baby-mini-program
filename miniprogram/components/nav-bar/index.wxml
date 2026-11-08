@@ -1,0 +1,14 @@
+<view class="nav-placeholder" style="height: {{statusBarHeight + navHeight}}px"></view>
+<view class="nav" style="padding-top: {{statusBarHeight}}px; background: {{background}}">
+  <view class="nav-bar" style="height: {{navHeight}}px; padding-right: {{capsuleRight}}px">
+    <view wx:if="{{back}}" class="back" bindtap="onBack" hover-class="btn-hover">
+      <text class="back-arrow">‹</text>
+    </view>
+    <view class="left flex1">
+      <slot name="left"></slot>
+    </view>
+    <view wx:if="{{title}}" class="title" style="left: {{capsuleRight}}px; right: {{capsuleRight}}px">
+      {{title}}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+.welcome {
+  padding: 24rpx 8rpx 32rpx;
+}
+
+.desc {
+  margin-top: 12rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.form {
+  margin-top: 16rpx;
+  padding: 0 32rpx;
+}
+
+.gender {
+  max-width: 360rpx;
+  margin-left: auto;
+}
+
+.unit {
+  width: 56rpx;
+  margin-left: 12rpx;
+  color: var(--color-text-2);
+}
+
+.optional {
+  margin-left: 16rpx;
+  font-weight: 400;
+}

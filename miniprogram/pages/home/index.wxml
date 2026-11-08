@@ -1,0 +1,88 @@
+<nav-bar />
+<view class="page page-tab">
+  <view wx:if="{{error}}" class="error">
+    <empty icon="📡" text="网络不稳定，没能加载数据">
+      <view class="btn secondary retry" hover-class="btn-hover" bindtap="onRetry">重试</view>
+    </empty>
+  </view>
+  <block wx:else>
+    <!-- 头部 -->
+    <view class="header" bindtap="goProfile">
+      <view class="greeting">{{greeting}}</view>
+      <view class="row">
+        <text class="hero name ellipsis">{{nickname || '宝宝'}}</text>
+        <text class="avatar">{{avatar}}</text>
+      </view>
+      <view class="age muted">{{ageLine}}</view>
+    </view>
+    <!-- 进行中计时 -->
+    <view wx:for="{{running}}" wx:key="id" class="running-bar" style="background: {{item.bg}}; color: {{item.color}}" data-id="{{item.id}}" bindtap="onOpenRunning">
+      <view class="dot" style="background: {{item.color}}"></view>
+      <view class="running-text flex1 row">
+        <text>{{item.label}}中{{item.side ? ' · ' + item.side : ''}} ·</text>
+        <timer-text start="{{item.startAt}}" />
+      </view>
+      <view class="stop-btn" style="background: {{item.color}}" data-id="{{item.id}}" catchtap="onStopRunning">
+        结束
+      </view>
+    </view>
+    <!-- 概览 -->
+    <view class="stats">
+      <view class="stat-card feed">
+        <view class="stat-title">上次喂养</view>
+        <view class="stat">
+          <timer-text wx:if="{{lastFeedAt}}" start="{{lastFeedAt}}" format="ago" />
+          <text wx:else>—</text>
+        </view>
+        <view class="stat-sub">{{lastFeedLabel || '还没有记录'}}</view>
+        <view class="stat-foot">
+          <view wx:for="{{feedLines}}" wx:key="*this">{{item}}</view>
+        </view>
+      </view>
+      <view class="stat-card sleep">
+        <view class="stat-title">今日睡眠</view>
+        <view class="stat">{{sleepText}}</view>
+        <view class="stat-sub">累计时长</view>
+        <view class="stat-foot">
+          <view>{{diaperLine}}</view>
+          <view wx:if="{{lastDiaperAt}}" class="row">
+            <text>上次换尿布</text>
+            <timer-text start="{{lastDiaperAt}}" format="ago" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 低库存 -->
+    <view wx:if="{{lowStockText}}" class="low-stock" hover-class="btn-hover" bindtap="goInventory">
+      <text class="low-icon">!</text>
+      <text class="flex1 ellipsis">{{lowStockText}}</text>
+      <text class="arrow">›</text>
+    </view>
+    <!-- 快速记录 -->
+    <view class="section-title">快速记录</view>
+    <view class="quick-grid">
+      <view wx:for="{{quick}}" wx:key="type" class="quick" hover-class="btn-hover" data-type="{{item.type}}" bindtap="onQuick">
+        <view class="type-icon" style="background: {{item.bg}}">
+          <image src="{{item.icon}}" />
+        </view>
+        <text class="quick-label">{{item.label}}</text>
+        <text wx:if="{{item.running}}" class="quick-running" style="background: {{item.color}}">
+          计时中
+        </text>
+      </view>
+    </view>
+    <!-- 今天的记录 -->
+    <view class="section-title">
+      <text>今天的记录</text>
+      <text class="more" bindtap="goTimeline">查看全部 →</text>
+    </view>
+    <view wx:if="{{!loaded}}" class="loading">加载中…</view>
+    <empty wx:elif="{{!recent.length}}" text="今天还没有记录，点上面的按钮开始吧" />
+    <view wx:else>
+      <view wx:for="{{recent}}" wx:key="id" class="recent-item">
+        <record-card item="{{item}}" show-time bind:open="onOpenRecord" />
+      </view>
+    </view>
+  </block>
+</view>
+<record-sheet id="record-sheet" bind:saved="onSaved" />

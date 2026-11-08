@@ -1,0 +1,183 @@
+<bottom-sheet show="{{show}}" title="{{title}}" bind:close="onClose">
+  <text slot="action" wx:if="{{recordId}}" class="delete" bindtap="onDelete">
+    {{mode === 'running' ? '放弃' : '删除'}}
+  </text>
+  <view class="sheet-body">
+    <!-- 计时中：大号计时 -->
+    <view wx:if="{{mode === 'running'}}" class="clock-wrap">
+      <view class="clock mono" style="color: {{color}}">
+        <timer-text start="{{startAt}}" />
+      </view>
+      <view wx:if="{{type === 'breastfeed'}}" class="sides">
+        <view class="side {{activeSide === 'left' ? 'on' : ''}}" style="{{activeSide === 'left' ? 'border-color:' + color + ';background:' + bg : ''}}">
+          <view class="side-name">左侧{{activeSide === 'left' ? ' · 喂奶中' : ''}}</view>
+          <view class="side-time mono">
+            <timer-text base="{{leftBase}}" start="{{activeStart}}" running="{{activeSide === 'left'}}" />
+          </view>
+        </view>
+        <view class="side {{activeSide === 'right' ? 'on' : ''}}" style="{{activeSide === 'right' ? 'border-color:' + color + ';background:' + bg : ''}}">
+          <view class="side-name">右侧{{activeSide === 'right' ? ' · 喂奶中' : ''}}</view>
+          <view class="side-time mono">
+            <timer-text base="{{rightBase}}" start="{{activeStart}}" running="{{activeSide === 'right'}}" />
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{type === 'breastfeed'}}" class="btn secondary switch {{saving ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSwitchSide">
+        切换到{{activeSide === 'left' ? '右侧' : '左侧'}}
+      </view>
+    </view>
+    <!-- 时间 -->
+    <view class="card form-card">
+      <view class="form-item" bindtap="onToggleStartPicker">
+        <text class="form-label">{{mode === 'point' ? '时间' : '开始时间'}}</text>
+        <text class="form-value">{{startText}}</text>
+        <text class="chevron">{{picker === 'start' ? '⌃' : '›'}}</text>
+      </view>
+      <view wx:if="{{mode === 'point' || mode === 'idle'}}" class="form-item column chips-row">
+        <chip-group options="{{timeChips}}" value="{{timeChip}}" bind:change="onTimeChip" />
+      </view>
+      <datetime-picker wx:if="{{picker === 'start'}}" value="{{startAt}}" bind:change="onPickStart" />
+      <block wx:if="{{mode === 'manual' && type === 'sleep'}}">
+        <view class="form-item" bindtap="onToggleEndPicker">
+          <text class="form-label">结束时间</text>
+          <text class="form-value">{{endText}}</text>
+          <text class="chevron">{{picker === 'end' ? '⌃' : '›'}}</text>
+        </view>
+        <datetime-picker wx:if="{{picker === 'end'}}" value="{{endAt}}" bind:change="onPickEnd" />
+      </block>
+      <view wx:if="{{spanText}}" class="span faint">{{spanText}}</view>
+    </view>
+    <!-- 亲喂补录 -->
+    <view wx:if="{{mode === 'manual' && type === 'breastfeed'}}" class="card form-card">
+      <view class="form-item column">
+        <text class="form-label">左侧（分钟）</text>
+        <stepper value="{{leftMin}}" min="0" max="120" unit="分钟" data-field="leftMin" bind:change="onField" />
+      </view>
+      <view class="form-item column">
+        <text class="form-label">右侧（分钟）</text>
+        <stepper value="{{rightMin}}" min="0" max="120" unit="分钟" data-field="rightMin" bind:change="onField" />
+      </view>
+    </view>
+    <!-- 瓶喂 -->
+    <view wx:if="{{type === 'bottle'}}" class="card form-card">
+      <view class="form-item column">
+        <text class="form-label">奶量</text>
+        <stepper value="{{amountMl}}" step="10" min="0" max="1000" unit="mL" data-field="amountMl" bind:change="onField" />
+        <view class="chips-gap">
+          <chip-group options="{{bottleChips}}" value="{{amountMl}}" data-field="amountMl" bind:change="onNumberChip" />
+        </view>
+      </view>
+      <view class="form-item column">
+        <text class="form-label">类型</text>
+        <chip-group options="{{milkOptions}}" value="{{milkType}}" data-field="milkType" bind:change="onField" />
+      </view>
+    </view>
+    <!-- 换尿布 -->
+    <view wx:if="{{type === 'diaper'}}" class="card form-card">
+      <view class="form-item column">
+        <text class="form-label">类型</text>
+        <chip-group options="{{diaperOptions}}" value="{{diaperKind}}" data-field="diaperKind" bind:change="onField" />
+      </view>
+      <block wx:if="{{diaperKind !== 'pee'}}">
+        <view class="form-item column">
+          <text class="form-label">颜色（可选）</text>
+          <chip-group options="{{colorOptions}}" value="{{pooColor}}" allow-empty data-field="pooColor" bind:change="onField" />
+        </view>
+        <view class="form-item column">
+          <text class="form-label">性状（可选）</text>
+          <chip-group options="{{textureOptions}}" value="{{pooTexture}}" allow-empty data-field="pooTexture" bind:change="onField" />
+        </view>
+      </block>
+    </view>
+    <!-- 吸奶 -->
+    <view wx:if="{{type === 'pump'}}" class="card form-card">
+      <view class="form-item column">
+        <view class="row between">
+          <text class="form-label">吸奶量</text>
+          <chip-group options="{{pumpModeOptions}}" value="{{pumpMode}}" data-field="pumpMode" bind:change="onField" />
+        </view>
+        <block wx:if="{{pumpMode === 'total'}}">
+          <stepper value="{{pumpTotal}}" step="10" min="0" max="2000" unit="mL" data-field="pumpTotal" bind:change="onField" />
+          <view class="chips-gap">
+            <chip-group options="{{pumpChips}}" value="{{pumpTotal}}" data-field="pumpTotal" bind:change="onNumberChip" />
+          </view>
+        </block>
+        <block wx:else>
+          <view class="sub-label faint">左侧</view>
+          <stepper value="{{pumpLeft}}" step="10" min="0" max="1000" unit="mL" data-field="pumpLeft" bind:change="onField" />
+          <view class="sub-label faint">右侧</view>
+          <stepper value="{{pumpRight}}" step="10" min="0" max="1000" unit="mL" data-field="pumpRight" bind:change="onField" />
+          <view class="span faint">合计 {{pumpLeft + pumpRight}} mL</view>
+        </block>
+      </view>
+      <view class="form-item">
+        <text class="form-label">时长（可选）</text>
+        <input class="form-input" type="number" placeholder="分钟" value="{{pumpDuration}}" data-field="pumpDuration" bindinput="onInput" />
+      </view>
+    </view>
+    <!-- 体温 -->
+    <view wx:if="{{type === 'temperature'}}" class="card form-card">
+      <view class="form-item">
+        <text class="form-label">体温</text>
+        <input class="form-input temp-input mono {{fever ? 'fever' : ''}}" type="digit" placeholder="36.8" value="{{celsiusText}}" data-field="celsiusText" bindinput="onInput" />
+        <text class="unit">℃</text>
+      </view>
+      <view wx:if="{{fever}}" class="fever-hint">体温偏高，请留意宝宝状态</view>
+      <view class="form-item column">
+        <text class="form-label">测量部位</text>
+        <chip-group options="{{siteOptions}}" value="{{site}}" bind:change="onSite" />
+      </view>
+    </view>
+    <!-- 用药 -->
+    <view wx:if="{{type === 'medicine'}}" class="card form-card">
+      <view class="form-item column">
+        <text class="form-label">药品名称</text>
+        <input class="name-input" placeholder="如：维生素 D3" maxlength="32" value="{{medName}}" data-field="medName" bindinput="onInput" />
+        <view wx:if="{{medicineOptions.length}}" class="chips-gap">
+          <chip-group options="{{medicineOptions}}" scroll bind:change="onMedicineChip" />
+        </view>
+      </view>
+      <view class="form-item column">
+        <text class="form-label">剂量</text>
+        <stepper value="{{medDose}}" step="0.5" min="0" max="10000" digits="1" data-field="medDose" bind:change="onField" />
+        <view class="chips-gap">
+          <chip-group options="{{unitOptions}}" value="{{medUnit}}" data-field="medUnit" bind:change="onField" />
+        </view>
+      </view>
+    </view>
+    <!-- 备注 -->
+    <view wx:if="{{mode !== 'idle'}}" class="card form-card">
+      <view class="form-item">
+        <text class="form-label">备注</text>
+        <input class="form-input" placeholder="可选" maxlength="500" value="{{note}}" data-field="note" bindinput="onInput" />
+      </view>
+    </view>
+  </view>
+  <view slot="footer">
+    <block wx:if="{{mode === 'idle'}}">
+      <view wx:if="{{type === 'breastfeed'}}" class="row start-row">
+        <view class="btn flex1 {{saving ? 'disabled' : ''}}" style="background: {{color}}" hover-class="btn-hover" data-side="left" bindtap="onStart">
+          左侧开始
+        </view>
+        <view class="btn flex1 {{saving ? 'disabled' : ''}}" style="background: {{color}}" hover-class="btn-hover" data-side="right" bindtap="onStart">
+          右侧开始
+        </view>
+      </view>
+      <view wx:else class="btn {{saving ? 'disabled' : ''}}" style="background: {{color}}" hover-class="btn-hover" bindtap="onStart">
+        开始计时
+      </view>
+      <view class="link" bindtap="onManual">手动补录</view>
+    </block>
+    <view wx:elif="{{mode === 'running'}}" class="btn {{saving ? 'disabled' : ''}}" style="background: {{color}}" hover-class="btn-hover" bindtap="onStop">
+      结束并保存
+    </view>
+    <block wx:else>
+      <view class="btn {{saving ? 'disabled' : ''}}" style="background: {{color}}" hover-class="btn-hover" bindtap="onSave">
+        保存
+      </view>
+      <view wx:if="{{mode === 'manual' && !recordId}}" class="link" bindtap="onBackToTimer">
+        改为计时
+      </view>
+    </block>
+  </view>
+</bottom-sheet>

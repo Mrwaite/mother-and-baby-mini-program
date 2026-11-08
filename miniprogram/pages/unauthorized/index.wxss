@@ -1,0 +1,35 @@
+.wrap {
+  padding-top: 80rpx;
+  text-align: center;
+}
+
+.icon {
+  font-size: 96rpx;
+}
+
+.title {
+  margin-top: 24rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.desc {
+  margin: 20rpx 24rpx 48rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.id-card {
+  margin-bottom: 48rpx;
+}
+
+.openid {
+  margin: 16rpx 0 24rpx;
+  font-size: 28rpx;
+  word-break: break-all;
+}
+
+.copy {
+  height: 72rpx;
+  font-size: 28rpx;
+}

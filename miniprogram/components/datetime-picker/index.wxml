@@ -1,0 +1,11 @@
+<picker-view class="picker" indicator-class="indicator" value="{{indexes}}" immediate-change bindchange="onChange">
+  <picker-view-column class="col-date">
+    <view wx:for="{{dateLabels}}" wx:key="*this" class="cell">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{hours}}" wx:key="*this" class="cell">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{minutes}}" wx:key="*this" class="cell">{{item}}</view>
+  </picker-view-column>
+</picker-view>

@@ -1,0 +1,98 @@
+.head {
+  margin-top: 16rpx;
+}
+
+.head.low {
+  background: var(--color-danger-bg);
+  border-color: #F8D3D3;
+}
+
+.name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.edit {
+  padding: 8rpx 0 8rpx 24rpx;
+  font-size: 28rpx;
+  color: var(--color-accent);
+}
+
+.qty-row {
+  margin: 24rpx 0 8rpx;
+}
+
+.qty {
+  font: var(--font-hero);
+  font-size: 88rpx;
+}
+
+.head.low .qty {
+  color: var(--color-danger);
+}
+
+.unit {
+  margin-left: 8rpx;
+  font-size: 30rpx;
+}
+
+.low-text {
+  color: var(--color-danger);
+}
+
+.note {
+  margin-top: 12rpx;
+}
+
+.actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+}
+
+.logs {
+  padding: 0 32rpx;
+}
+
+.log {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.log:last-child {
+  border-bottom: none;
+}
+
+.log-action {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.log-delta {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.log-delta.plus {
+  color: #2CB5A0;
+}
+
+.log-delta.minus {
+  color: var(--color-danger);
+}
+
+.extra {
+  margin-top: 6rpx;
+}
+
+.sheet-form {
+  padding: 0 32rpx;
+}
+
+.hint {
+  margin-top: 16rpx;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+<nav-bar back title="我的" />
+<view class="page page-sub">
+  <view class="card baby" hover-class="btn-hover" bindtap="onEditBaby">
+    <view class="row">
+      <text class="avatar">{{avatar}}</text>
+      <view class="flex1">
+        <view class="nickname">{{hasBaby ? nickname : '还没有宝宝档案'}}</view>
+        <view wx:if="{{hasBaby}}" class="muted small">{{genderText}} · {{ageText}}</view>
+      </view>
+      <text class="edit">编辑 ›</text>
+    </view>
+    <view wx:if="{{hasBaby}}" class="baby-info">
+      <view class="form-item">
+        <text class="form-label muted">生日</text>
+        <text class="form-value">{{birthText}}</text>
+      </view>
+      <view class="form-item">
+        <text class="form-label muted">出生数据</text>
+        <text class="form-value">{{birthInfo || '未填写'}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="section-title">家庭成员</view>
+  <view class="card list">
+    <view class="form-item">
+      <text class="form-label">我的名字</text>
+      <text class="form-value">{{displayName}}</text>
+    </view>
+    <view class="form-item" bindtap="onCopyOpenid">
+      <text class="form-label">openid</text>
+      <text class="form-value mono small ellipsis">{{openid}}</text>
+      <text class="copy">复制</text>
+    </view>
+  </view>
+  <view class="faint small tip">显示名和家庭成员由管理员在服务端维护。</view>
+  <view class="section-title">关于</view>
+  <view class="card list">
+    <view class="form-item">
+      <text class="form-label">版本</text>
+      <text class="form-value">{{version}}</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">运行环境</text>
+      <text class="form-value">{{envText}}</text>
+    </view>
+  </view>
+</view>

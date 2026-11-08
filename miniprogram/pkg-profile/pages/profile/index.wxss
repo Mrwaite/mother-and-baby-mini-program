@@ -1,0 +1,36 @@
+.baby {
+  margin-top: 16rpx;
+}
+
+.avatar {
+  margin-right: 24rpx;
+  font-size: 88rpx;
+}
+
+.nickname {
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.edit {
+  font-size: 26rpx;
+  color: var(--color-accent);
+}
+
+.baby-info {
+  margin-top: 16rpx;
+}
+
+.list {
+  padding: 0 32rpx;
+}
+
+.copy {
+  margin-left: 16rpx;
+  font-size: 26rpx;
+  color: var(--color-accent);
+}
+
+.tip {
+  padding: 0 8rpx;
+}

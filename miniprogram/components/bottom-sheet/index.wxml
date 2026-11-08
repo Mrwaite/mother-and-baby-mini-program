@@ -1,0 +1,19 @@
+<view class="sheet-root {{show ? 'open' : ''}}" catchtouchmove="noop">
+  <view class="mask" bindtap="onClose"></view>
+  <view class="panel" catchtap="noop">
+    <view class="handle"></view>
+    <view class="header">
+      <text class="close" bindtap="onClose">关闭</text>
+      <text class="title">{{title}}</text>
+      <view class="header-right">
+        <slot name="action"></slot>
+      </view>
+    </view>
+    <scroll-view scroll-y class="body" enhanced show-scrollbar="{{false}}">
+      <slot></slot>
+    </scroll-view>
+    <view class="footer">
+      <slot name="footer"></slot>
+    </view>
+  </view>
+</view>

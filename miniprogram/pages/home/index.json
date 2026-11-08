@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "record-card": "/components/record-card/index",
+    "record-sheet": "/components/record-sheet/index",
+    "timer-text": "/components/timer-text/index"
+  }
+}

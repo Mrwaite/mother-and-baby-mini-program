@@ -1,0 +1,86 @@
+<nav-bar back title="耗材详情" />
+<view class="page page-sub">
+  <view wx:if="{{!item}}" class="loading">加载中…</view>
+  <block wx:else>
+    <view class="card head {{item.low ? 'low' : ''}}">
+      <view class="row between">
+        <view class="flex1">
+          <view class="name">{{item.name}}</view>
+          <view class="muted small">
+            {{categoryLabel}}{{item.spec ? ' · ' + item.spec : ''}}{{item.archived ? ' · 已归档' : ''}}
+          </view>
+        </view>
+        <text class="edit" bindtap="onEdit">编辑</text>
+      </view>
+      <view class="qty-row">
+        <text class="qty">{{item.quantity}}</text>
+        <text class="unit muted">{{item.unit}}</text>
+      </view>
+      <view class="small {{item.low ? 'low-text' : 'faint'}}">
+        {{item.low ? '库存不足，' : ''}}低于 {{item.lowThreshold}} {{item.unit}} 时提醒
+      </view>
+      <view wx:if="{{item.note}}" class="faint small note">{{item.note}}</view>
+    </view>
+    <view class="actions">
+      <view class="btn action-btn" hover-class="btn-hover" data-action="in" bindtap="onAction">
+        入库
+      </view>
+      <view class="btn secondary action-btn" hover-class="btn-hover" data-action="out" bindtap="onAction">
+        出库
+      </view>
+      <view class="btn secondary action-btn" hover-class="btn-hover" data-action="adjust" bindtap="onAction">
+        盘点
+      </view>
+    </view>
+    <view class="section-title">流水</view>
+    <empty wx:if="{{!logs.length && !loadingLogs}}" icon="🧾" text="还没有流水" />
+    <view wx:if="{{logs.length}}" class="card logs">
+      <view wx:for="{{logs}}" wx:key="id" class="log">
+        <view class="row between">
+          <text class="log-action">{{item.action}}</text>
+          <text class="log-delta {{item.positive ? 'plus' : 'minus'}}">{{item.delta}}</text>
+        </view>
+        <view class="row between faint small">
+          <text>{{item.time}} · {{item.recorder}}</text>
+          <text>结余 {{item.after}}</text>
+        </view>
+        <view wx:if="{{item.extra}}" class="muted small extra">{{item.extra}}</view>
+      </view>
+    </view>
+    <view wx:if="{{loadingLogs}}" class="loading">加载中…</view>
+  </block>
+</view>
+<bottom-sheet show="{{sheetShow}}" title="{{actionTitle}}" bind:close="onCloseSheet">
+  <view class="card sheet-form">
+    <view class="form-item column">
+      <text class="form-label">{{action === 'adjust' ? '实际数量' : '数量'}}</text>
+      <stepper value="{{qty}}" min="0" max="100000" unit="{{item.unit}}" bind:change="onQty" />
+      <view wx:if="{{action === 'adjust'}}" class="faint small hint">
+        当前记录为 {{item.quantity}} {{item.unit}}，保存后修正为实际数量
+      </view>
+    </view>
+    <block wx:if="{{action === 'in'}}">
+      <view class="form-item">
+        <text class="form-label">金额</text>
+        <input class="form-input" type="digit" placeholder="选填，总价（元）" value="{{priceText}}" data-field="priceText" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">渠道</text>
+        <input class="form-input" placeholder="选填，如：京东 / 母婴店" maxlength="32" value="{{channel}}" data-field="channel" bindinput="onInput" />
+      </view>
+    </block>
+    <picker mode="date" value="{{occurredDate}}" end="{{today}}" bindchange="onDate">
+      <view class="form-item">
+        <text class="form-label">日期</text>
+        <text class="form-value">{{occurredDate === today ? '今天' : occurredDate}}</text>
+      </view>
+    </picker>
+    <view class="form-item">
+      <text class="form-label">备注</text>
+      <input class="form-input" placeholder="可选" maxlength="500" value="{{note}}" data-field="note" bindinput="onInput" />
+    </view>
+  </view>
+  <view slot="footer" class="btn {{submitting ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSubmit">
+    确定
+  </view>
+</bottom-sheet>

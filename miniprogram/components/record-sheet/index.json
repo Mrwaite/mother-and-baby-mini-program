@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bottom-sheet": "/components/bottom-sheet/index",
+    "chip-group": "/components/chip-group/index",
+    "stepper": "/components/stepper/index",
+    "datetime-picker": "/components/datetime-picker/index",
+    "timer-text": "/components/timer-text/index"
+  }
+}

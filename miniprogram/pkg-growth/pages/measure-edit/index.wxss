@@ -1,0 +1,15 @@
+.form {
+  margin-top: 16rpx;
+  padding: 0 32rpx;
+}
+
+.unit {
+  width: 56rpx;
+  margin-left: 12rpx;
+  color: var(--color-text-2);
+}
+
+.delete {
+  margin-top: 16rpx;
+  color: var(--color-danger);
+}

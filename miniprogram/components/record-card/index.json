@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "timer-text": "/components/timer-text/index"
+  }
+}

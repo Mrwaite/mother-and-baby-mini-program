@@ -1,0 +1,23 @@
+<view class="record-card {{item.running ? 'running' : ''}}" hover-class="btn-hover" catchtap="onTap">
+  <view class="type-icon" style="background: {{item.bg}}">
+    <image src="{{item.icon}}" />
+  </view>
+  <view class="main flex1">
+    <view class="row">
+      <text class="label">{{item.label}}</text>
+      <view wx:if="{{item.running}}" class="tag value-tag row" style="color: {{item.color}}; background: {{item.bg}}">
+        <text>进行中</text>
+        <timer-text start="{{item.startAt}}" />
+      </view>
+      <text wx:elif="{{item.value}}" class="tag value-tag {{item.alert ? 'alert' : ''}}">
+        {{item.value}}
+      </text>
+    </view>
+    <view wx:if="{{item.sub}}" class="sub ellipsis">{{item.sub}}</view>
+  </view>
+  <view class="side">
+    <text wx:if="{{showTime}}" class="time mono">{{item.time}}</text>
+    <text class="recorder">{{item.recorder}}</text>
+  </view>
+  <text class="arrow">›</text>
+</view>

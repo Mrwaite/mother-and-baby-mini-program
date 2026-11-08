@@ -1,0 +1,17 @@
+<nav-bar />
+<view class="page wrap">
+  <view class="icon">🔒</view>
+  <view class="title">暂无访问权限</view>
+  <view class="desc muted">这是家庭内部使用的小程序。请把下面的 ID 发给管理员，加入家庭成员后再点「重试」。</view>
+  <view class="card id-card">
+    <view class="faint small">我的 openid</view>
+    <view wx:if="{{openid}}" class="openid mono">{{openid}}</view>
+    <view wx:else class="openid muted">未能获取，请稍后重试</view>
+    <view wx:if="{{openid}}" class="btn secondary copy" hover-class="btn-hover" bindtap="onCopy">
+      复制
+    </view>
+  </view>
+  <view class="btn {{retrying ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onRetry">
+    {{retrying ? '正在重试…' : '重试'}}
+  </view>
+</view>

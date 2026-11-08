@@ -1,0 +1,52 @@
+<nav-bar back title="{{id ? '编辑里程碑' : '记录里程碑'}}" />
+<view class="page page-sub">
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+  <block wx:else>
+    <view class="card form">
+      <picker mode="date" value="{{date}}" start="{{birthDate}}" end="{{today}}" bindchange="onDate">
+        <view class="form-item">
+          <text class="form-label">日期</text>
+          <text class="form-value">{{date}}</text>
+        </view>
+      </picker>
+      <view class="form-item">
+        <text class="form-label">标题</text>
+        <input class="form-input" placeholder="如：第一次翻身" maxlength="64" value="{{title}}" data-field="title" bindinput="onInput" />
+      </view>
+      <view class="form-item column presets">
+        <chip-group options="{{presets}}" value="{{title}}" bind:change="onPreset" />
+      </view>
+      <view class="form-item column">
+        <text class="form-label">描述</text>
+        <textarea class="textarea" placeholder="可选，记下当时的情景" maxlength="1000" value="{{description}}" data-field="description" bindinput="onInput" auto-height />
+      </view>
+    </view>
+    <view class="card">
+      <view class="row between photo-head">
+        <text class="form-label">照片</text>
+        <text class="faint small">{{photos.length}} / {{max}}</text>
+      </view>
+      <view class="grid">
+        <view wx:for="{{photos}}" wx:key="key" class="cell" data-key="{{item.key}}" bindtap="onTapPhoto">
+          <image class="img" src="{{item.src}}" mode="aspectFill" />
+          <view wx:if="{{item.status === 'uploading'}}" class="mask">{{item.progress}}%</view>
+          <view wx:elif="{{item.status === 'failed'}}" class="mask failed">
+            上传失败
+            <text class="small">点击重试</text>
+          </view>
+          <view class="remove" data-key="{{item.key}}" catchtap="onRemovePhoto">×</view>
+        </view>
+        <view wx:if="{{photos.length < max}}" class="cell add" hover-class="btn-hover" bindtap="onChoose">
+          <text class="plus">+</text>
+          <text class="faint small">添加照片</text>
+        </view>
+      </view>
+    </view>
+    <view class="btn {{saving ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSave">
+      保存
+    </view>
+    <view wx:if="{{id}}" class="btn ghost delete" hover-class="btn-hover" bindtap="onDelete">
+      删除这个里程碑
+    </view>
+  </block>
+</view>

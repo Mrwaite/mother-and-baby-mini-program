@@ -1,0 +1,98 @@
+.title-row {
+  padding: 8rpx 8rpx 24rpx;
+}
+
+.jump {
+  padding: 12rpx 24rpx;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+  font-size: 26rpx;
+}
+
+.today-link {
+  margin-right: 20rpx;
+  font-size: 26rpx;
+  color: var(--color-accent);
+}
+
+.filters {
+  margin: 0 -32rpx 16rpx;
+  padding: 0 32rpx;
+}
+
+.group-head {
+  position: sticky;
+  z-index: 5;
+  margin: 0 -32rpx;
+  padding: 24rpx 40rpx 16rpx;
+  background: var(--color-bg);
+}
+
+.group-label {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.group-count {
+  font-size: 24rpx;
+}
+
+.group-summary {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+}
+
+.day-empty {
+  padding: 24rpx 8rpx 32rpx;
+  font-size: 24rpx;
+}
+
+.item {
+  display: flex;
+}
+
+.axis {
+  position: relative;
+  width: 112rpx;
+  flex-shrink: 0;
+}
+
+.axis-time {
+  display: block;
+  padding-top: 38rpx;
+  font-size: 24rpx;
+  color: var(--color-text-2);
+}
+
+.axis-dot {
+  position: absolute;
+  top: 46rpx;
+  right: 16rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+}
+
+.axis-line {
+  position: absolute;
+  top: 70rpx;
+  bottom: -46rpx;
+  right: 23rpx;
+  width: 2rpx;
+  background: var(--color-border);
+}
+
+.item-body {
+  padding-bottom: 16rpx;
+}
+
+.gap {
+  padding: 12rpx 0 0 8rpx;
+  font-size: 22rpx;
+  color: var(--color-text-3);
+}
+
+.gap.overlap {
+  color: var(--color-accent);
+}

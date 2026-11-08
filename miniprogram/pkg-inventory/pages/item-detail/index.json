@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "bottom-sheet": "/components/bottom-sheet/index",
+    "stepper": "/components/stepper/index"
+  }
+}

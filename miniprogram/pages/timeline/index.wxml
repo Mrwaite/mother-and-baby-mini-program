@@ -1,0 +1,44 @@
+<nav-bar />
+<view class="page page-tab">
+  <view class="title-row row between">
+    <text class="hero">时间线</text>
+    <view class="row">
+      <text wx:if="{{jumped}}" class="today-link" bindtap="onBackToday">回到今天</text>
+      <picker mode="date" value="{{todayKey}}" start="{{birthDate}}" end="{{todayKey}}" bindchange="onJump">
+        <view class="jump">📅 选日期</view>
+      </picker>
+    </view>
+  </view>
+  <view class="filters">
+    <chip-group options="{{filterOptions}}" value="{{filter}}" scroll bind:change="onFilter" />
+  </view>
+  <view wx:for="{{groups}}" wx:key="key" wx:for-item="group" class="group">
+    <view class="group-head" style="top: {{stickyTop}}px">
+      <view class="row between">
+        <text class="group-label">{{group.label}}</text>
+        <text class="group-count faint">{{group.count}} 条</text>
+      </view>
+      <view wx:if="{{group.summary}}" class="group-summary muted">{{group.summary}}</view>
+    </view>
+    <view wx:if="{{!group.items.length}}" class="day-empty faint">
+      这天没有{{filter ? '这类' : ''}}记录
+    </view>
+    <view wx:for="{{group.items}}" wx:key="id" class="item">
+      <view class="axis">
+        <text class="axis-time mono">{{item.time}}</text>
+        <view class="axis-dot" style="background: {{item.color}}"></view>
+        <view wx:if="{{index < group.items.length - 1}}" class="axis-line"></view>
+      </view>
+      <view class="item-body flex1">
+        <record-card item="{{item}}" bind:open="onOpenRecord" />
+        <view wx:if="{{item.gapText}}" class="gap {{item.overlap ? 'overlap' : ''}}">
+          {{item.gapText}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+  <view wx:elif="{{noMore && groups.length}}" class="loading">已经到宝宝出生的那天了</view>
+  <view wx:elif="{{groups.length}}" class="loading" bindtap="onReachBottom">加载更早的记录</view>
+</view>
+<record-sheet id="record-sheet" bind:saved="onSaved" />

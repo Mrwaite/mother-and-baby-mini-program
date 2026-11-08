@@ -1,5 +1,9 @@
+@import './styles/tokens.wxss';
+@import './styles/common.wxss';
+
 page {
-  background-color: #f7f7f7;
-  color: #333;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-size: 28rpx;
+  font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
 }

@@ -1,0 +1,26 @@
+/* 设计 token：统一放在 CSS 变量里，为以后的夜间模式留余地 */
+page {
+  --color-bg: #FAF8F5;
+  --color-surface: #FFFFFF;
+  --color-border: #F0EBE6;
+  --color-text: #1A1A1A;
+  --color-text-2: #8A8580;
+  --color-text-3: #B5B0AB;
+  --color-primary: #D9443A;
+  --color-primary-bg: #FBE6E4;
+  --color-accent: #E8833A;
+  --color-accent-bg: #FDF0E6;
+  --color-danger: #E5484D;
+  --color-danger-bg: #FDECEC;
+
+  --radius-card: 32rpx;
+  --radius-sm: 20rpx;
+  --radius-pill: 999rpx;
+  --shadow-card: 0 4rpx 24rpx rgba(80, 50, 30, 0.04);
+
+  --font-hero: 600 64rpx/1.2 -apple-system, 'PingFang SC', sans-serif;
+  --font-stat: 600 48rpx/1.3 -apple-system, 'PingFang SC', sans-serif;
+
+  /* 自定义 TabBar 高度（不含底部安全区），页面底部需要留出同样的空白 */
+  --tabbar-height: 150rpx;
+}

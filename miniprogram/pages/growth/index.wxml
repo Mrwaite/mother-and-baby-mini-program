@@ -1,0 +1,72 @@
+<nav-bar />
+<view class="page page-tab">
+  <view class="title">
+    <view class="hero">成长</view>
+    <view class="muted age">{{ageLine}}</view>
+  </view>
+  <segmented options="{{tabs}}" value="{{tab}}" bind:change="onTab" />
+  <!-- 生长测量 -->
+  <block wx:if="{{tab === 'measure'}}">
+    <view class="card latest">
+      <view class="row between">
+        <text class="card-title">最新测量</text>
+        <text class="link" bindtap="goCurve">查看曲线 →</text>
+      </view>
+      <view class="metrics">
+        <view wx:for="{{latest}}" wx:key="metric" class="metric">
+          <view class="metric-label muted">{{item.label}}</view>
+          <view class="metric-value">
+            <text class="stat">{{item.value}}</text>
+            <text class="metric-unit muted">{{item.unit}}</text>
+          </view>
+          <view wx:if="{{item.band}}" class="band">{{item.band}}</view>
+          <view wx:if="{{item.date}}" class="metric-date faint">{{item.date}}</view>
+        </view>
+      </view>
+      <view class="faint small">百分位参考 WHO 儿童生长标准，仅供参考</view>
+    </view>
+    <view class="section-title">历史记录</view>
+    <view wx:if="{{!loadedMeasure}}" class="loading">加载中…</view>
+    <empty wx:elif="{{!measures.length}}" icon="📏" text="还没有测量记录，点右下角 + 添加" />
+    <view wx:else class="card list">
+      <view wx:for="{{measures}}" wx:key="id" class="measure" hover-class="btn-hover" data-id="{{item.id}}" bindtap="onEditMeasure">
+        <view class="row between">
+          <text class="measure-date">{{item.date}}</text>
+          <text class="faint small">{{item.age}}</text>
+        </view>
+        <view class="measure-values">
+          <view wx:for="{{item.values}}" wx:key="label" wx:for-item="v" class="measure-value">
+            <text>{{v.label}} {{v.value}}</text>
+            <text wx:if="{{v.band}}" class="band small-band">{{v.band}}</text>
+          </view>
+        </view>
+        <view wx:if="{{item.note}}" class="faint small">{{item.note}}</view>
+      </view>
+    </view>
+  </block>
+  <!-- 里程碑 -->
+  <block wx:else>
+    <view wx:if="{{!loadedMilestone}}" class="loading">加载中…</view>
+    <empty wx:elif="{{!milestones.length}}" icon="⭐" text="记录第一次翻身、第一次笑……" />
+    <view wx:else class="milestones">
+      <view wx:for="{{milestones}}" wx:key="id" wx:for-item="m" class="milestone">
+        <view class="ms-axis">
+          <view class="ms-dot"></view>
+          <view class="ms-line"></view>
+        </view>
+        <view class="ms-body flex1" hover-class="btn-hover" data-id="{{m.id}}" bindtap="onEditMilestone">
+          <view class="row between">
+            <text class="ms-date">{{m.date}}</text>
+            <text class="faint small">{{m.age}}</text>
+          </view>
+          <view class="ms-title">{{m.title}}</view>
+          <view wx:if="{{m.description}}" class="ms-desc muted">{{m.description}}</view>
+          <view wx:if="{{m.photos.length}}" class="photos">
+            <image wx:for="{{m.photos}}" wx:key="*this" wx:for-item="src" class="photo" src="{{src}}" mode="aspectFill" lazy-load data-mid="{{m.id}}" data-index="{{index}}" catchtap="onPreview" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="fab" hover-class="btn-hover" bindtap="onAdd">+</view>
+</view>

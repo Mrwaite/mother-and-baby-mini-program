@@ -1,10 +1,68 @@
 {
-  "pages": ["pages/index/index"],
+  "pages": [
+    "pages/home/index",
+    "pages/timeline/index",
+    "pages/growth/index",
+    "pages/inventory/index",
+    "pages/unauthorized/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pkg-growth",
+      "pages": [
+        "pages/measure-edit/index",
+        "pages/curve/index",
+        "pages/milestone-edit/index"
+      ]
+    },
+    {
+      "root": "pkg-inventory",
+      "pages": [
+        "pages/item-edit/index",
+        "pages/item-detail/index"
+      ]
+    },
+    {
+      "root": "pkg-profile",
+      "pages": [
+        "pages/profile/index",
+        "pages/baby-edit/index"
+      ]
+    }
+  ],
   "window": {
-    "navigationBarTitleText": "宝宝日常记录",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f7f7f7"
+    "backgroundColor": "#FAF8F5",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#B5B0AB",
+    "selectedColor": "#D9443A",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/timeline/index",
+        "text": "时间线"
+      },
+      {
+        "pagePath": "pages/growth/index",
+        "text": "成长"
+      },
+      {
+        "pagePath": "pages/inventory/index",
+        "text": "库存"
+      }
+    ]
+  },
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/index",
+    "empty": "/components/empty/index"
   },
   "style": "v2",
   "lazyCodeLoading": "requiredComponents"

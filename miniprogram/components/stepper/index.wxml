@@ -1,0 +1,12 @@
+<view class="stepper">
+  <view class="btn-step {{value <= min ? 'off' : ''}}" hover-class="btn-hover" bindtap="onMinus">
+    −
+  </view>
+  <view class="center">
+    <input class="input mono" type="{{digits > 0 ? 'digit' : 'number'}}" value="{{text}}" bindinput="onInput" bindblur="onBlur" bindconfirm="onBlur" />
+    <text wx:if="{{unit}}" class="unit">{{unit}}</text>
+  </view>
+  <view class="btn-step {{value >= max ? 'off' : ''}}" hover-class="btn-hover" bindtap="onPlus">
+    +
+  </view>
+</view>

@@ -1,0 +1,49 @@
+<nav-bar back="{{!onboarding}}" title="{{onboarding ? '' : '宝宝档案'}}" />
+<view class="page page-sub">
+  <view wx:if="{{onboarding}}" class="welcome">
+    <view class="hero">欢迎 👋</view>
+    <view class="muted desc">先建立宝宝档案，就可以开始记录啦。之后可以在首页点宝宝名字修改。</view>
+  </view>
+  <view class="card form">
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="form-input" placeholder="如：小米粒" maxlength="32" value="{{nickname}}" data-field="nickname" bindinput="onInput" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="flex1 gender">
+        <segmented options="{{genderOptions}}" value="{{gender}}" bind:change="onGender" />
+      </view>
+    </view>
+    <picker mode="date" value="{{birthDate}}" end="{{today}}" bindchange="onDate">
+      <view class="form-item">
+        <text class="form-label">生日</text>
+        <text class="form-value">{{birthDate}}</text>
+      </view>
+    </picker>
+  </view>
+  <view class="section-title">
+    出生数据
+    <text class="faint small optional">选填，用于生长曲线</text>
+  </view>
+  <view class="card form">
+    <view class="form-item">
+      <text class="form-label">身长</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{height}}" data-field="height" bindinput="onInput" />
+      <text class="unit">cm</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">体重</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{weight}}" data-field="weight" bindinput="onInput" />
+      <text class="unit">kg</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">头围</text>
+      <input class="form-input" type="digit" placeholder="选填" value="{{head}}" data-field="head" bindinput="onInput" />
+      <text class="unit">cm</text>
+    </view>
+  </view>
+  <view class="btn {{saving ? 'disabled' : ''}}" hover-class="btn-hover" bindtap="onSave">
+    {{onboarding ? '开始使用' : '保存'}}
+  </view>
+</view>

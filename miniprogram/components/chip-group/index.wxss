@@ -1,0 +1,35 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.chips.nowrap {
+  flex-wrap: nowrap;
+  padding: 4rpx 0;
+}
+
+.chips-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 0 28rpx;
+  height: 64rpx;
+  line-height: 62rpx;
+  box-sizing: border-box;
+  border-radius: var(--radius-pill);
+  border: 1rpx solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 28rpx;
+}
+
+.chip.on {
+  border-color: var(--color-accent);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-weight: 600;
+}

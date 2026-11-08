@@ -1,0 +1,43 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-step {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+  text-align: center;
+  line-height: 84rpx;
+  font-size: 48rpx;
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.btn-step.off {
+  color: var(--color-text-3);
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.input {
+  width: 220rpx;
+  height: 88rpx;
+  text-align: center;
+  font-size: 56rpx;
+  font-weight: 600;
+}
+
+.unit {
+  margin-left: 8rpx;
+  font-size: 28rpx;
+  color: var(--color-text-2);
+}

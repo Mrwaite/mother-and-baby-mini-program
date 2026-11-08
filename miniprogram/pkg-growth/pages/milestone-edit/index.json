@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "chip-group": "/components/chip-group/index"
+  }
+}

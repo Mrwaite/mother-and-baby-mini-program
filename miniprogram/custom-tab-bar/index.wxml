@@ -1,0 +1,13 @@
+<view class="tabbar">
+  <view class="tabbar-inner">
+    <view wx:for="{{tabs}}" wx:key="pagePath" class="tab {{selected === index ? 'active' : ''}}" data-index="{{index}}" bindtap="onTap">
+      <view class="icon-wrap">
+        <image class="icon" src="/assets/tab/{{item.icon}}-{{selected === index ? 'on' : 'off'}}.svg" />
+        <view wx:if="{{index === 3 && lowStock > 0}}" class="badge">
+          {{lowStock > 9 ? '9+' : lowStock}}
+        </view>
+      </view>
+      <text class="text">{{item.text}}</text>
+    </view>
+  </view>
+</view>

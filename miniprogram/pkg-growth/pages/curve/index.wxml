@@ -1,0 +1,30 @@
+<nav-bar back title="生长曲线" />
+<view class="page page-sub">
+  <segmented options="{{tabs}}" value="{{metric}}" bind:change="onTab" />
+  <view class="card chart-card">
+    <view class="row between legend">
+      <text class="faint small">单位：{{unit}}</text>
+      <view class="row">
+        <view class="legend-line ref"></view>
+        <text class="faint small">WHO 百分位</text>
+        <view class="legend-dot"></view>
+        <text class="faint small">宝宝</text>
+      </view>
+    </view>
+    <canvas type="2d" id="curve" class="chart"></canvas>
+    <view wx:if="{{empty}}" class="faint small hint">还没有{{metricLabel}}数据，可在宝宝档案里补充出生数据</view>
+  </view>
+  <view wx:if="{{rows.length}}" class="card list">
+    <view wx:for="{{rows}}" wx:key="key" class="row between data-row">
+      <view>
+        <view class="data-date">{{item.date}}</view>
+        <view class="faint small">{{item.age}}</view>
+      </view>
+      <view class="data-right">
+        <view class="data-value">{{item.value}}</view>
+        <view wx:if="{{item.band}}" class="band">{{item.band}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="faint small note">参考：WHO Child Growth Standards（0–5 岁）。曲线仅供参考，具体请以儿保医生评估为准。</view>
+</view>

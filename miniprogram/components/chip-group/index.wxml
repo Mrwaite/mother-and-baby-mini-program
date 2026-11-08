@@ -1,0 +1,12 @@
+<scroll-view wx:if="{{scroll}}" scroll-x enhanced show-scrollbar="{{false}}" class="chips-scroll">
+  <view class="chips nowrap">
+    <view wx:for="{{options}}" wx:key="value" class="chip {{item.value === value ? 'on' : ''}}" style="{{item.value === value && color ? 'color:' + color + ';border-color:' + color : ''}}" data-index="{{index}}" bindtap="onTap">
+      {{item.label}}
+    </view>
+  </view>
+</scroll-view>
+<view wx:else class="chips">
+  <view wx:for="{{options}}" wx:key="value" class="chip {{item.value === value ? 'on' : ''}}" style="{{item.value === value && color ? 'color:' + color + ';border-color:' + color : ''}}" data-index="{{index}}" bindtap="onTap">
+    {{item.label}}
+  </view>
+</view>
