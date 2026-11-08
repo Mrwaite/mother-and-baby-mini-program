@@ -55,7 +55,9 @@ Page({
     syncTabBar(this, 0);
     this.renderHeader();
     // 家人可能刚记录过：每次回到首页都刷新（30 秒内且本地无改动时跳过）
-    if (dirty.take() || Date.now() - loadedAt > 30000) this.load();
+    const changed = dirty.take();
+    // reLaunch 会重建页面实例，但模块缓存仍在；新实例必须先拉取数据。
+    if (!this.data.loaded || changed || Date.now() - loadedAt > 30000) this.load();
   },
 
   onPullDownRefresh() {

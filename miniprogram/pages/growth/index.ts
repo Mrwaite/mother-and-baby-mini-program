@@ -85,9 +85,11 @@ Page({
 
   async loadCurrent() {
     if (this.data.tab === 'measure') {
-      if (growthDirty.take()) await this.loadMeasures();
-    } else if (milestoneDirty.take()) {
-      await this.loadMilestones();
+      const changed = growthDirty.take();
+      if (!this.data.loadedMeasure || changed) await this.loadMeasures();
+    } else {
+      const changed = milestoneDirty.take();
+      if (!this.data.loadedMilestone || changed) await this.loadMilestones();
     }
   },
 

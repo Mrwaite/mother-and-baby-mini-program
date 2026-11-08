@@ -10,6 +10,7 @@ const TABS = [
 Component({
   options: { styleIsolation: 'apply-shared' },
   data: {
+    visible: true,
     selected: 0,
     /** 库存 Tab 的低库存角标 */
     lowStock: 0,

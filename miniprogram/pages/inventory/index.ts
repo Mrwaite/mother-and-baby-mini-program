@@ -53,7 +53,8 @@ Page({
   async onShow() {
     syncTabBar(this, 3);
     if (!(await ensureSession())) return;
-    if (dirty.take()) this.load();
+    const changed = dirty.take();
+    if (!this.data.loaded || changed) this.load();
   },
 
   onPullDownRefresh() {
