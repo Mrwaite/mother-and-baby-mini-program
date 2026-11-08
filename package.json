@@ -1,0 +1,13 @@
+{
+  "name": "mother-and-baby-mini-program",
+  "version": "0.1.0",
+  "private": true,
+  "description": "母婴家庭记录小程序",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^4.0.0",
+    "typescript": "^5.6.0"
+  }
+}
